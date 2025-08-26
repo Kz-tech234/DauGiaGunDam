@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head>
+        <meta charset="UTF-8">
+        <title>Thêm loại sản phẩm</title>
+    <th:block th:replace="base :: styles"></th:block>
+</head>
+<body>
+<th:block th:replace="base :: header"></th:block>
+
+<div class="container mt-4">
+    <h2>Thêm loại sản phẩm</h2>
+
+    <form th:action="@{/admin/loaiSanPham}" th:object="${loaiSanPham}" method="post" class="mt-3">
+        <div class="mb-3">
+            <label for="tenLoai" class="form-label">Tên loại sản phẩm</label>
+            <input type="text" th:field="*{tenLoai}" class="form-control" placeholder="Nhập tên loại sản phẩm" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Thêm loại</button>
+    </form>
+
+    <div th:if="${successMessage}" class="alert alert-success mt-3" th:text="${successMessage}"></div>
+
+    <hr/>
+    <h4>Danh sách loại sản phẩm hiện có</h4>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên loại</th>
+                <th>Trạng thái</th>
+                <th>Xóa loại sản phẩm</th>
+                <th>Khóa/Mở khóa</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="l : ${dsLoai}">
+                <td th:text="${l.id}"></td>
+                <td th:text="${l.tenLoai}"></td>
+                <td th:text="${l.trangThai}"></td>
+                <!-- Cột: Xóa loại sản phẩm -->
+                <td>
+                    <form th:action="@{/admin/xoa-loai}" method="post">
+                        <input type="hidden" name="id" th:value="${l.id}" />
+                        <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
+                    </form>
+                </td>
+
+                <!-- Cột: Khóa / Mở khóa -->
+                <td>
+                    <form th:action="@{/admin/khoa-loai}" method="post" th:if="${l.trangThai != 'BI_KHOA'}">
+                        <input type="hidden" name="id" th:value="${l.id}" />
+                        <button type="submit" class="btn btn-warning btn-sm">Khóa</button>
+                    </form>
+
+                    <form th:action="@{/admin/mo-khoa-loai}" method="post" th:if="${l.trangThai == 'BI_KHOA'}">
+                        <input type="hidden" name="id" th:value="${l.id}" />
+                        <button type="submit" class="btn btn-success btn-sm">Mở khóa</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<th:block th:replace="base :: footer"></th:block>
+</body>
+</html>
+
+

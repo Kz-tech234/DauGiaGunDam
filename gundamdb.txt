@@ -1,0 +1,125 @@
+USE gundamdb;
+
+CREATE TABLE nguoidungs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    hoTen VARCHAR(100) NOT NULL,
+    soDienThoai VARCHAR(20) NOT NULL,
+    diaChi TEXT NOT NULL,
+    vaiTro ENUM('ROLE_ADMIN', 'ROLE_NGUOIBAN', 'ROLE_NGUOIMUA') DEFAULT 'ROLE_NGUOIMUA',
+    avatar VARCHAR(255),
+    ngayTao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    trangThai VARCHAR(20)
+);
+
+-- Bang loai san pham
+CREATE TABLE loaimohinh (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nguoiDung_id INT,
+    tenLoai VARCHAR(50) NOT NULL,
+    trangThai VARCHAR(20) DEFAULT 'HOAT_DONG',
+    FOREIGN KEY (nguoiDung_id) REFERENCES nguoidungs(id)
+);
+
+-- Bang san pham
+CREATE TABLE mohinhs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nguoiDung_id INT,
+    loaiSanPham_id INT,
+    tenSanPham VARCHAR(100) NOT NULL,
+    moTa TEXT NOT NULL,
+    hinhAnh VARCHAR(255) NOT NULL,
+    giaKhoiDiem DECIMAL(10,2) NOT NULL,
+    buocNhay DECIMAL(10,2) NOT NULL,
+    ngayDang TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    thoiGianKetThuc DATETIME NOT NULL,
+    trangThai ENUM('CHO_DUYET', 'DUYET', 'KHONG_DUYET') DEFAULT 'CHO_DUYET',
+    FOREIGN KEY (nguoiDung_id) REFERENCES nguoidungs(id),
+    FOREIGN KEY (loaiSanPham_id) REFERENCES loaisanpham(id)
+);
+
+-- Bang phien dau gia
+CREATE TABLE cuocdaugia (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nguoiDang_id INT,
+    sanPham_id INT,
+    thoiGianBatDau DATETIME,
+    thoiGianKetThuc DATETIME,
+    trangThai ENUM('dang_dien_ra', 'da_ket_thuc') DEFAULT 'dang_dien_ra',
+    giaChot DECIMAL(10,2),
+    nguoiThangDauGia_id INT,
+    daThongBaoKQ TINYINT NOT NULL DEFAULT 0,
+    FOREIGN KEY (nguoiDang_id) REFERENCES nguoidungs(id),
+    FOREIGN KEY (sanPham_id) REFERENCES sanphams(id),
+    FOREIGN KEY (nguoiThangDauGia_id) REFERENCES nguoidungs(id)
+);
+
+-- Bảng phien dau gia nguoi dung
+CREATE TABLE nguoidungcuocdaugia (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    phienDauGia_id INT,
+    nguoiDung_id INT,
+    giaDau DECIMAL(10,2),
+    thoiGianDauGia TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (phienDauGia_id) REFERENCES phiendaugia(id),
+    FOREIGN KEY (nguoiDung_id) REFERENCES nguoidungs(id)
+);
+
+-- Bang danh sach theo doi san pham
+CREATE TABLE theodoimohinhs (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nguoiDung_id INT,
+    phienDauGia_id INT,
+    ngayTheoDoi TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (nguoiDung_id) REFERENCES nguoidungs(id),
+    FOREIGN KEY (phienDauGia_id) REFERENCES phiendaugia(id),
+    UNIQUE(nguoiDung_id, phienDauGia_id)
+);
+
+CREATE TABLE taikhoannganhang (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nguoiBan_id INT NOT NULL,
+  tenNguoiNhan VARCHAR(100) NOT NULL,
+  nganHang VARCHAR(100) NOT NULL,
+  soTaiKhoan VARCHAR(40) NOT NULL,
+  qrUrl VARCHAR(255) NOT NULL,                 -- link ảnh QR (đã upload)
+  macDinh TINYINT DEFAULT 1,          -- 1: dùng mặc định khi có nhiều TK
+  ngayTao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (nguoiBan_id) REFERENCES nguoidungs(id)
+);
+
+CREATE TABLE donthangdaugia (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  phienDauGia_id INT NOT NULL,
+  nguoiMua_id INT NOT NULL,            -- người thắng phiên
+  soTien DECIMAL(10,2) NOT NULL,       -- = giaChot
+  trangThai ENUM('PENDING','SELLER_REVIEW','PAID','CANCELLED') DEFAULT 'PENDING',
+  lyDoTuNguoiBan TEXT,
+  phuongThuc ENUM('COD','BANK') DEFAULT 'COD',
+  hoTenNhan VARCHAR(100),
+  soDienThoai VARCHAR(20),
+  diaChiNhan TEXT,
+  ghiChu TEXT,
+  ngayTao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  ngayThanhToan TIMESTAMP NULL,
+  ngaySellerDuyet TIMESTAMP NULL,
+  UNIQUE(phienDauGia_id),
+  FOREIGN KEY (phienDauGia_id) REFERENCES phiendaugia(id),
+  FOREIGN KEY (nguoiMua_id) REFERENCES nguoidungs(id)
+);
+
+USE gundamdb;
+UPDATE nguoidungs SET vaiTro = 'ROLE_ADMIN' WHERE username = 'admin';
+INSERT INTO nguoidungs (taiKhoan, matKhau, email, hoTen, sdt, diaChi, role, trangThai)
+VALUES (
+    'admin',
+    '$2a$10$Af7DHT4moV4hfhQk.Y7DFu6ACjD5mgzXPMgs3Bjf0qKUqtx41yOhO',
+    'admin123@gmail.com',
+    'Nguyễn Đăng Khôi',
+    '0287653532',
+    'TP.HCM',
+    'ROLE_ADMIN',
+    'duocDuyet'
+);

@@ -1,0 +1,142 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <title>Thống kê đấu giá</title>
+    <th:block th:replace="base :: styles"></th:block>
+    <style>
+        .kpi-card {
+            border: 0;
+            border-radius: 1rem;
+            box-shadow: 0 6px 16px rgba(0,0,0,.08);
+        }
+        .kpi-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+        .table thead th {
+            position: sticky;
+            top: 0;
+            background: #fff;
+            z-index: 1;
+        }
+        .nowrap {
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <header th:replace="base :: header"></header>
+
+    <div class="container py-4">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+            <h3 class="mb-0">Thống kê đấu giá</h3>
+            <a class="btn btn-outline-secondary btn-sm" th:href="@{/}">Về trang chủ</a>
+        </div>
+
+        <!-- Bộ lọc -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <form th:action="@{/admin/thongKeDauGia}" method="get" class="row gy-2 gx-3 align-items-end">
+                    <div class="col-sm-4">
+                        <label for="startDate" class="form-label">Từ ngày</label>
+                        <input type="date" id="startDate" name="startDate" class="form-control"
+                               th:value="${startDate}">
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="endDate" class="form-label">Đến ngày</label>
+                        <input type="date" id="endDate" name="endDate" class="form-control"
+                               th:value="${endDate}">
+                    </div>
+                    <div class="col-sm-4 d-flex gap-2">
+                        <button type="submit" class="btn btn-primary flex-grow-1">Tìm kiếm</button>
+                        <!-- quick range -->
+                        <a class="btn btn-light"
+                           th:href="@{/admin/thongKeDauGia(
+                           startDate=${T(java.time.LocalDate).now().minusDays(7)},
+                           endDate=${T(java.time.LocalDate).now()}
+                           )}">7 ngày</a>
+
+                        <a class="btn btn-light"
+                           th:href="@{/admin/thongKeDauGia(
+                           startDate=${T(java.time.LocalDate).now().minusDays(30)},
+                           endDate=${T(java.time.LocalDate).now()}
+                           )}">30 ngày</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- KPI -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-4">
+                <div class="card kpi-card">
+                    <div class="card-body">
+                        <div class="text-muted small">Tổng doanh thu</div>
+                        <div class="kpi-value"
+                             th:text="${#numbers.formatDecimal(totalRevenue,0,'COMMA',0,'POINT')} + ' VND'">0</div>
+                        <div class="small text-muted" th:text="${startDate} + ' → ' + ${endDate}"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card kpi-card">
+                    <div class="card-body">
+                        <div class="text-muted small">Tổng đơn PAID</div>
+                        <div class="kpi-value" th:text="${totalOrders}">0</div>
+                        <div class="small text-success">Đã thanh toán</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card kpi-card">
+                    <div class="card-body">
+                        <div class="text-muted small">Giá trị trung bình/đơn</div>
+                        <div class="kpi-value"
+                             th:text="${totalOrders > 0 ? #numbers.formatDecimal(totalRevenue.divide(new java.math.BigDecimal(totalOrders)),0,'COMMA',0,'POINT') + ' VND' : '—'}">—</div>
+                        <div class="small text-muted">= Doanh thu / Số đơn</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bảng -->
+        <div class="card">
+            <div class="card-header bg-white">
+                <div class="d-flex justify-content-between align-items-center">
+                    <strong>Chi tiết theo ngày</strong>
+                    <span class="badge text-bg-secondary"
+                          th:text="${#lists.size(auctionStats)} + ' ngày'">0 ngày</span>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th>Ngày</th>
+                            <th class="text-end nowrap">Tổng tiền (VND)</th>
+                            <th class="text-end nowrap">Số đơn PAID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="stat : ${auctionStats}">
+                            <td th:text="${stat.ngay}"></td>
+                            <td class="text-end nowrap"
+                                th:text="${#numbers.formatDecimal(stat.tongTien,0,'COMMA',0,'POINT')}"></td>
+                            <td class="text-end nowrap" th:text="${stat.soDonThanhToan}"></td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(auctionStats)}">
+                            <td colspan="3" class="text-center text-muted py-4">
+                                Không có dữ liệu trong khoảng thời gian đã chọn.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="base :: footer"></footer>
+</body>
+</html>
+

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head>
+        <meta charset="UTF-8">
+        <title>Trang quản trị</title>
+
+        <!-- Gọi fragment styles trong <head> -->
+    <th:block th:replace="~{base :: styles}"></th:block>
+</head>
+<body>
+<th:block th:replace="~{base :: header}"></th:block>
+
+<div class="container mt-4">
+    <h2>Quản lý người dùng</h2>
+
+    <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+
+    <!-- Form thêm người dùng -->
+    <form th:action="@{/admin/add-user}" method="post" enctype="multipart/form-data" class="mt-4">
+        <!-- ... (các trường form ở đây như bạn đã có) ... -->
+    </form>
+
+    <!-- Danh sách người dùng -->
+    <h4 class="mt-5">Danh sách người dùng</h4>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Tên đăng nhập</th>
+                <th>Email</th>
+                <th>Vai trò</th>
+                <th>Mật khẩu (đã mã hóa)</th>
+                <th>Avatar</th>
+                <th>Trạng thái</th>
+                <th>Xóa người Dùng</th>
+                <th>Khóa/Mở khóa</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="u, iterStat : ${users}">
+                <td th:text="${iterStat.index + 1}"></td>
+                <td th:text="${u.username}"></td>
+                <td th:text="${u.email}"></td>
+                <td th:text="${u.vaiTro}"></td>
+
+                <td>
+                    <input type="text" th:value="${u.password}" class="form-control form-control-sm" readonly style="font-size: 0.75rem;" />
+                </td>
+                <td>
+                    <img th:if="${u.avatar}" th:src="${u.avatar}" alt="Avatar" width="50" height="50" class="rounded-circle"/>
+                    <span th:if="${u.avatar == null}">No avatar</span>
+                </td>
+                <td th:text="${u.trangThai}"></td>
+                <td>
+                    <form th:action="@{/admin/delete-user}" method="post">
+                        <input type="hidden" name="userId" th:value="${u.id}" />
+                        <button type="submit" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này không?')">
+                            Xóa
+                        </button>
+                    </form>
+                </td>
+
+                <td>
+                    <form th:action="@{/admin/khoa-user}" method="post" style="display:inline-block;"
+                          th:if="${u.trangThai != 'BI_KHOA'}">
+                        <input type="hidden" name="userId" th:value="${u.id}" />
+                        <button type="submit" class="btn btn-warning btn-sm"
+                                onclick="return confirm('Bạn có chắc chắn muốn khóa tài khoản này không?')">
+                            Khóa
+                        </button>
+                    </form>
+
+                    <!-- Nút Mở Khóa -->
+                    <form th:action="@{/admin/mo-khoa-user}" method="post" style="display:inline-block;"
+                          th:if="${u.trangThai == 'BI_KHOA'}">
+                        <input type="hidden" name="userId" th:value="${u.id}" />
+                        <button type="submit" class="btn btn-success btn-sm"
+                                onclick="return confirm('Bạn có chắc chắn muốn mở khóa tài khoản này không?')">
+                            Mở khóa
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>
+
+<th:block th:replace="~{base :: footer}"></th:block>
+</body>
+</html>
+
