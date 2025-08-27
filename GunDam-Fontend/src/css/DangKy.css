@@ -1,0 +1,61 @@
+.signup-container {
+  max-width: 800px; /* Wider form */
+  margin: 50px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.form-style {
+  margin-top: 30px;
+}
+
+.form-input {
+  width: 100%;
+  max-width: 500px;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin-bottom: 18px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+textarea.form-input {
+  min-height: 100px; /* Đảm bảo textarea có chiều cao tối thiểu */
+  resize: none; /* Tắt khả năng thay đổi kích thước thủ công của textarea */
+}
+
+
+.submit-button {
+  width: 100%;
+  padding: 14px;
+  font-size: 18px;
+  border-radius: 8px;
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+h2 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 28px;
+  color: #333;
+}
+
+label {
+  font-weight: 600;
+  color: #555;
+}

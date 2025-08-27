@@ -1,0 +1,119 @@
+/* Giao diện banner */
+.banner {
+    background-color: #28a745;  /* Màu xanh lá */
+    padding: 80px 0;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Nút đánh giá luôn hiển thị rõ ràng */
+.btn-hover {
+    background-color: #007bff; /* Màu nền nút khi chưa hover */
+    color: white;
+    padding: 10px 20px;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer; /* Thêm con trỏ pointer cho dễ nhận biết */
+}
+
+/* Hiệu ứng khi hover */
+.btn-hover:hover {
+    background-color: #0056b3; /* Đổi màu khi hover */
+    transform: scale(1.1); /* Phóng to khi hover */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Thêm bóng đổ khi hover */
+}
+
+/* Điều chỉnh màu nền cho nút đăng nhập/đăng ký */
+.btn-hover-light {
+    background-color: transparent;
+    color: #007bff;
+    border: 2px solid #007bff;
+}
+
+.btn-hover-light:hover {
+    background-color: #007bff;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Hiệu ứng cho các thẻ */
+.effect-card {
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    border-radius: 10px;
+}
+
+.effect-card:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px);
+}
+
+/* Điều chỉnh kiểu chữ cho tiêu đề và phần mô tả */
+h1, h3 {
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 2.5rem;
+    background: linear-gradient(90deg, #007bff, #28a745); /* Gradient xanh */
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.fs-5 {
+    font-size: 18px;
+    color: #333;
+    line-height: 1.5;
+}
+
+.text-white {
+    color: white !important;
+}
+
+.text-dark {
+    color: #333 !important;
+}
+
+.text-success {
+    color: #28a745 !important; /* Màu xanh lá */
+}
+
+.text-secondary {
+    color: #6c757d !important;
+}
+
+.text-muted {
+    color: #7a7a7a;
+}
+
+/* Thêm hiệu ứng gradient cho tiêu đề */
+.text-gradient {
+    background: linear-gradient(90deg, #007bff, #28a745);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+/* Thêm phần padding cho các card */
+.card {
+    padding: 20px;
+}
+
+/* Thêm khoảng cách giữa các card */
+.card-body {
+    padding: 20px;
+}
+
+/* Giới hạn chiều rộng ảnh, giúp ảnh tràn và cân đối */
+.img-fluid {
+    width: 100%;
+    height: auto;
+}
+
+.carousel {
+  margin-bottom: 50px; /* Tạo khoảng cách dưới slider ảnh */
+  margin-top: 50px;
+}
