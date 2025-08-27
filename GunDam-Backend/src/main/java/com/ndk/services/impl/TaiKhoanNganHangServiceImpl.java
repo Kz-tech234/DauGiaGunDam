@@ -4,10 +4,36 @@
  */
 package com.ndk.services.impl;
 
+import com.ndk.pojo.NguoiDung;
+import com.ndk.pojo.TaiKhoanNganHang;
+import com.ndk.repositories.TaiKhoanNganHangRepository;
+import com.ndk.services.TaiKhoanNganHangService;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 /**
  *
- * @author Tran Quoc Phong
+ * @author Nguyen Dang Khoi
  */
-public class TaiKhoanNganHangServiceImpl {
+@Service
+public class TaiKhoanNganHangServiceImpl implements TaiKhoanNganHangService{
+    @Autowired
+    private TaiKhoanNganHangRepository repo;
+
+    @Override
+    public List<TaiKhoanNganHang> findByNguoiBan(NguoiDung nd) {
+        return repo.findByNguoiBan(nd);
+    }
+
+    @Override
+    public TaiKhoanNganHang addTaiKhoan(NguoiDung u, String tenNguoiNhan, String nganHang, String soTaiKhoan, MultipartFile qrFile) {
+        return repo.addTaiKhoan(u, tenNguoiNhan, nganHang, soTaiKhoan, qrFile);
+    }
     
+    @Override
+    public boolean taiKhoanNguoiBan(NguoiDung nd) {
+        return !repo.findByNguoiBan(nd).isEmpty();
+    }
 }

@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 
 /**
  *
- * @author Tran Quoc Phong
+ * @author Nguyen Dang Khoi
  */
 @Entity
 @Table(name = "nguoidung_cuocdaugias")

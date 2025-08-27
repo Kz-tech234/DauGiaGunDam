@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author Tran Quoc Phong
+ * @author Nguyen Dang Khoi
  */
 @Repository
 @Transactional
@@ -34,7 +34,7 @@ public class LoaiMoHinhRepositoryImpl implements LoaiMoHinhRepository{
     @Override
     public List<LoaiMoHinh> getLoaiSanPham() {
         Session session = this.factory.getObject().getCurrentSession();
-        String hql = "FROM LoaiSanPham WHERE trangThai IN ('HOAT_DONG', 'BI_KHOA')";
+        String hql = "FROM LoaiMoHinh WHERE trangThai IN ('HOAT_DONG', 'BI_KHOA')";
         Query<LoaiMoHinh> query = session.createQuery(hql, LoaiMoHinh.class);
         return query.getResultList();
     }
@@ -42,7 +42,7 @@ public class LoaiMoHinhRepositoryImpl implements LoaiMoHinhRepository{
     @Override
     public List<LoaiMoHinh> getLoaiSanPhamHoatDong() {
         Session session = this.factory.getObject().getCurrentSession();
-        String hql = "FROM LoaiSanPham WHERE trangThai IN ('HOAT_DONG')";
+        String hql = "FROM LoaiMoHinh WHERE trangThai IN ('HOAT_DONG')";
         Query<LoaiMoHinh> query = session.createQuery(hql, LoaiMoHinh.class);
         return query.getResultList();
     }

@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
- * @author Tran Quoc Phong
+ * @author Nguyen Dang Khoi
  */
 public interface MoHinhRepository {
     MoHinh addSanPham(String tenSanPham, String moTa, BigDecimal giaKhoiDiem, BigDecimal buocNhay, Date thoiGianKetThuc, int loaiSanPhamId, String username, MultipartFile avatar);

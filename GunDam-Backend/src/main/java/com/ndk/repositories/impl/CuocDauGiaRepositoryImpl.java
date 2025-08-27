@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author Tran Quoc Phong
+ * @author Nguyen Dang Khoi
  */
 @Repository
 @Transactional
@@ -36,7 +36,7 @@ public class CuocDauGiaRepositoryImpl implements CuocDauGiaRepository{
     @Override
     public List<CuocDauGia> getLayTatCaPhien() {
         Session session = this.factory.getObject().getCurrentSession();
-        Query<CuocDauGia> q = session.createQuery("FROM PhienDauGia", CuocDauGia.class);
+        Query<CuocDauGia> q = session.createQuery("FROM CuocDauGia", CuocDauGia.class);
         return q.getResultList();
     }
 

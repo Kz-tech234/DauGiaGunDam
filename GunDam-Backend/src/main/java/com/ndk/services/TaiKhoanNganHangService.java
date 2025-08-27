@@ -4,10 +4,17 @@
  */
 package com.ndk.services;
 
+import com.ndk.pojo.NguoiDung;
+import com.ndk.pojo.TaiKhoanNganHang;
+import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
+
 /**
  *
- * @author Tran Quoc Phong
+ * @author Nguyen Dang Khoi
  */
-public class TaiKhoanNganHangService {
-    
+public interface TaiKhoanNganHangService {
+    List<TaiKhoanNganHang> findByNguoiBan(NguoiDung nd);
+    TaiKhoanNganHang addTaiKhoan(NguoiDung u, String tenNguoiNhan, String nganHang, String soTaiKhoan, MultipartFile qrFile);
+    boolean taiKhoanNguoiBan(NguoiDung nd);
 }

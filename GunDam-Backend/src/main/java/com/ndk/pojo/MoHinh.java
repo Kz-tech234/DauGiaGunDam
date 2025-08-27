@@ -19,7 +19,7 @@ import java.util.Date;
 
 /**
  *
- * @author Tran Quoc Phong
+ * @author Nguyen Dang Khoi
  */
 @Entity
 @Table(name = "mohinhs")

@@ -37,7 +37,7 @@ CREATE TABLE mohinhs (
     thoiGianKetThuc DATETIME NOT NULL,
     trangThai ENUM('CHO_DUYET', 'DUYET', 'KHONG_DUYET') DEFAULT 'CHO_DUYET',
     FOREIGN KEY (nguoiDung_id) REFERENCES nguoidungs(id),
-    FOREIGN KEY (loaiSanPham_id) REFERENCES loaisanpham(id)
+    FOREIGN KEY (loaiSanPham_id) REFERENCES loaimohinh(id)
 );
 
 -- Bang phien dau gia
@@ -52,7 +52,7 @@ CREATE TABLE cuocdaugia (
     nguoiThangDauGia_id INT,
     daThongBaoKQ TINYINT NOT NULL DEFAULT 0,
     FOREIGN KEY (nguoiDang_id) REFERENCES nguoidungs(id),
-    FOREIGN KEY (sanPham_id) REFERENCES sanphams(id),
+    FOREIGN KEY (sanPham_id) REFERENCES mohinhs(id),
     FOREIGN KEY (nguoiThangDauGia_id) REFERENCES nguoidungs(id)
 );
 
@@ -63,7 +63,7 @@ CREATE TABLE nguoidungcuocdaugia (
     nguoiDung_id INT,
     giaDau DECIMAL(10,2),
     thoiGianDauGia TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (phienDauGia_id) REFERENCES phiendaugia(id),
+    FOREIGN KEY (phienDauGia_id) REFERENCES cuocdaugia(id),
     FOREIGN KEY (nguoiDung_id) REFERENCES nguoidungs(id)
 );
 
@@ -74,7 +74,7 @@ CREATE TABLE theodoimohinhs (
     phienDauGia_id INT,
     ngayTheoDoi TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (nguoiDung_id) REFERENCES nguoidungs(id),
-    FOREIGN KEY (phienDauGia_id) REFERENCES phiendaugia(id),
+    FOREIGN KEY (phienDauGia_id) REFERENCES cuocdaugia(id),
     UNIQUE(nguoiDung_id, phienDauGia_id)
 );
 
@@ -106,13 +106,13 @@ CREATE TABLE donthangdaugia (
   ngayThanhToan TIMESTAMP NULL,
   ngaySellerDuyet TIMESTAMP NULL,
   UNIQUE(phienDauGia_id),
-  FOREIGN KEY (phienDauGia_id) REFERENCES phiendaugia(id),
+  FOREIGN KEY (phienDauGia_id) REFERENCES cuocdaugia(id),
   FOREIGN KEY (nguoiMua_id) REFERENCES nguoidungs(id)
 );
 
 USE gundamdb;
 UPDATE nguoidungs SET vaiTro = 'ROLE_ADMIN' WHERE username = 'admin';
-INSERT INTO nguoidungs (taiKhoan, matKhau, email, hoTen, sdt, diaChi, role, trangThai)
+INSERT INTO nguoidungs (username, password, email, hoTen, soDienThoai, diaChi, vaiTro, trangThai)
 VALUES (
     'admin',
     '$2a$10$Af7DHT4moV4hfhQk.Y7DFu6ACjD5mgzXPMgs3Bjf0qKUqtx41yOhO',

@@ -4,10 +4,18 @@
  */
 package com.ndk.services;
 
+import com.ndk.pojo.LoaiMoHinh;
+import java.util.List;
+
 /**
  *
- * @author Tran Quoc Phong
+ * @author Nguyen Dang Khoi
  */
-public class LoaiMoHinhService {
-    
+public interface LoaiMoHinhService {
+    LoaiMoHinh addLoaiSanPham(LoaiMoHinh loaiSanPham);
+    List<LoaiMoHinh> getLoaiSanPham();
+    List<LoaiMoHinh> getLoaiSanPhamHoatDong();
+    boolean deleteLoaiSanPham(int id);
+    boolean khoaLoaiSanPham(int id);
+    boolean moKhoaLoaiSanPham(int id);
 }

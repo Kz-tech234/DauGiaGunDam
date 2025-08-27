@@ -4,10 +4,21 @@
  */
 package com.ndk.services;
 
+import com.ndk.pojo.MoHinh;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
+
 /**
  *
- * @author Tran Quoc Phong
+ * @author Nguyen Dang Khoi
  */
-public class MoHinhService {
-    
+public interface MoHinhService {
+    MoHinh addSanPham(String tenSanPham, String moTa, BigDecimal giaKhoiDiem, BigDecimal buocNhay, Date thoiGianKetThuc, int loaiSanPhamId, String username, MultipartFile avatar);
+    List<MoHinh> getAllSanPham();
+    boolean updateTrangThai(int id, String trangThai);
+    MoHinh getSanPhamById(int id);
+    boolean deleteSanPham(int id);
+    List<MoHinh> getSanPhamsTheoTrangThai(String trangThai);
 }

@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
- * @author Tran Quoc Phong
+ * @author Nguyen Dang Khoi
  */
 public interface TaiKhoanNganHangRepository {
     List<TaiKhoanNganHang> findByNguoiBan(NguoiDung nd);

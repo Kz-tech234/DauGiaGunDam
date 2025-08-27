@@ -24,7 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
- * @author Tran Quoc Phong
+ * @author Nguyen Dang Khoi
  */
 @Repository
 @Transactional
@@ -81,7 +81,7 @@ public class MoHinhRepositoryImpl implements MoHinhRepository{
     @Override
     public List<MoHinh> getAll() {
         Session session = this.factory.getObject().getCurrentSession();
-        Query<MoHinh> q = session.createQuery("FROM SanPham", MoHinh.class);
+        Query<MoHinh> q = session.createQuery("FROM MoHinh", MoHinh.class);
         return q.getResultList();
     }
     
@@ -117,7 +117,7 @@ public class MoHinhRepositoryImpl implements MoHinhRepository{
     @Override
     public List<MoHinh> getSanPhamsTheoTrangThai(String trangThai) {
         Session session = this.factory.getObject().getCurrentSession();
-        Query<MoHinh> q = session.createQuery("FROM SanPham WHERE trangThai = :tt", MoHinh.class);
+        Query<MoHinh> q = session.createQuery("FROM MoHinh WHERE trangThai = :tt", MoHinh.class);
         q.setParameter("tt", trangThai);
         return q.getResultList();
     }

@@ -4,10 +4,14 @@
  */
 package com.ndk.services;
 
+import com.ndk.dto.ThongKeDTO;
+import java.time.LocalDate;
+import java.util.List;
+
 /**
  *
- * @author Tran Quoc Phong
+ * @author Nguyen Dang Khoi
  */
-public class ThongKeService {
-    
+public interface ThongKeService {
+    List<ThongKeDTO> thongKeTheoNgay(LocalDate tuNgay, LocalDate denNgay);
 }

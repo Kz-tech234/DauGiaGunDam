@@ -15,7 +15,7 @@ import java.util.Date;
 
 /**
  *
- * @author Tran Quoc Phong
+ * @author Nguyen Dang Khoi
  */
 public class JwtUtils {
     private static final String SECRET = "12345678901234567890123456789012"; // 32 ký tự (AES key)

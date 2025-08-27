@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author Tran Quoc Phong
+ * @author Nguyen Dang Khoi
  */
 @Repository
 @Transactional
@@ -32,7 +32,7 @@ public class DonThangDauGiaRepositoryImpl implements DonThangDauGiaRepository{
 
     @Override
     public DonThangDauGia findByPhien(CuocDauGia p) {
-        String hql = "FROM DonThanhToanDauGia d WHERE d.phienDauGia = :p";
+        String hql = "FROM DonThangDauGia d WHERE d.phienDauGia = :p";
         return s().createQuery(hql, DonThangDauGia.class)
                 .setParameter("p", p)
                 .uniqueResult();
@@ -40,7 +40,7 @@ public class DonThangDauGiaRepositoryImpl implements DonThangDauGiaRepository{
 
     @Override
     public List<DonThangDauGia> findByNguoiMua(NguoiDung u) {
-        String hql = "FROM DonThanhToanDauGia d WHERE d.nguoiMua = :u ORDER BY d.ngayTao DESC";
+        String hql = "FROM DonThangDauGia d WHERE d.nguoiMua = :u ORDER BY d.ngayTao DESC";
         return s().createQuery(hql, DonThangDauGia.class)
                 .setParameter("u", u)
                 .getResultList();
@@ -87,7 +87,7 @@ public class DonThangDauGiaRepositoryImpl implements DonThangDauGiaRepository{
 
     @Override
     public List<DonThangDauGia> DonQuaHanChuaThanhToan(DonThangDauGia.TrangThai trangThai, Date deadline) {
-        String hql = "FROM DonThanhToanDauGia d WHERE d.trangThai = :trangThai AND d.ngayTao < :deadline";
+        String hql = "FROM DonThangnDauGia d WHERE d.trangThai = :trangThai AND d.ngayTao < :deadline";
         return s().createQuery(hql, DonThangDauGia.class)
                 .setParameter("trangThai", trangThai)
                 .setParameter("deadline", deadline)

@@ -4,10 +4,17 @@
  */
 package com.ndk.services;
 
+import com.ndk.pojo.NguoiDungCuocDauGia;
+import java.util.List;
+
 /**
  *
- * @author Tran Quoc Phong
+ * @author Nguyen Dang Khoi
  */
-public class NguoiDungCuocDauGiaService {
-    
+public interface NguoiDungCuocDauGiaService {
+    NguoiDungCuocDauGia datGia(NguoiDungCuocDauGia p);
+    List<NguoiDungCuocDauGia> getLichSuByPhien(int phienId);
+    List<NguoiDungCuocDauGia> getLichSuByNguoiDung(int nguoiDungId);
+    NguoiDungCuocDauGia getGiaCaoNhat(int phienId);
+    List<NguoiDungCuocDauGia> getByPhien(int phienId);
 }

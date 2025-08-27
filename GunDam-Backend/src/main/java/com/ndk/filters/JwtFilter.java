@@ -17,7 +17,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 
 /**
  *
- * @author Tran Quoc Phong
+ * @author Nguyen Dang Khoi
  */
 public class JwtFilter implements Filter{
     @Override

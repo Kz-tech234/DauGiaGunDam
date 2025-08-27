@@ -6,7 +6,7 @@ package com.ndk.services;
 
 /**
  *
- * @author Tran Quoc Phong
+ * @author Nguyen Dang Khoi
  */
 public interface MailService {
     void sendApprovalEmail(String toEmail, String hoTen);

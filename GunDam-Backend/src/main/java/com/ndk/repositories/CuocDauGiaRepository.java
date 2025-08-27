@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  *
- * @author Tran Quoc Phong
+ * @author Nguyen Dang Khoi
  */
 public interface CuocDauGiaRepository {
     CuocDauGia themPhienDauGia(CuocDauGia p);

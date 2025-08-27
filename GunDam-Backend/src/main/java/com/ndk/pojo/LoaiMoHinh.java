@@ -16,10 +16,10 @@ import java.io.Serializable;
 
 /**
  *
- * @author Tran Quoc Phong
+ * @author Nguyen Dang Khoi
  */
 @Entity
-@Table(name = "loaimohinhs")
+@Table(name = "loaimohinh")
 public class LoaiMoHinh implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  *
- * @author Tran Quoc Phong
+ * @author Nguyen Dang Khoi
  */
 public interface DonThangDauGiaRepository {
     DonThangDauGia findByPhien(CuocDauGia p);

@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author Tran Quoc Phong
+ * @author Nguyen Dang Khoi
  */
 public interface ThongKeRepository {
     List<ThongKeDTO> thongKeTheoNgay(LocalDate tuNgay, LocalDate denNgay);

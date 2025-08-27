@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author Tran Quoc Phong
+ * @author Nguyen Dang Khoi
  */
 @Service
 public class MailServiceImpl implements MailService{

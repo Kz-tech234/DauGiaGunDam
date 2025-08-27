@@ -14,7 +14,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 /**
  *
- * @author Tran Quoc Phong
+ * @author Nguyen Dang Khoi
  */
 @Configuration
 public class ThymeleafConfig {

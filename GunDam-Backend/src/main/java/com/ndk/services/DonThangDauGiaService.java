@@ -4,10 +4,22 @@
  */
 package com.ndk.services;
 
+import com.ndk.pojo.CuocDauGia;
+import com.ndk.pojo.DonThangDauGia;
+import com.ndk.pojo.NguoiDung;
+import java.util.List;
+
 /**
  *
- * @author Tran Quoc Phong
+ * @author Nguyen Dang Khoi
  */
-public class DonThangDauGiaService {
-    
+public interface DonThangDauGiaService {
+    DonThangDauGia findByPhien(CuocDauGia p);
+    List<DonThangDauGia> findByNguoiMua(NguoiDung u);
+    DonThangDauGia add(DonThangDauGia d);
+    DonThangDauGia update(DonThangDauGia d);
+    DonThangDauGia getById(Integer id);
+    DonThangDauGia taoDon(CuocDauGia p);
+    List<DonThangDauGia> DonQuaHanChuaThanhToan();
+    void huyDon(int donId, String lyDo);
 }

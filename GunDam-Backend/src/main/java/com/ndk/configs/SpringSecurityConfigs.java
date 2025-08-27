@@ -26,7 +26,7 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 /**
  *
- * @author Tran Quoc Phong
+ * @author Nguyen Dang Khoi
  */
 @Configuration
 @EnableWebSecurity
