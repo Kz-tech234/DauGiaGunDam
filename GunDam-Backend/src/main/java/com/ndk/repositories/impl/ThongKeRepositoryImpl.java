@@ -35,7 +35,7 @@ public class ThongKeRepositoryImpl implements ThongKeRepository{
             SELECT DATE(ngayThanhToan) AS ngay,
                    COALESCE(SUM(soTien), 0) AS tong_tien,
                    COUNT(*) AS so_don
-            FROM donthanhtoan_daugia
+            FROM donthangdaugia
             WHERE trangThai = 'PAID'
               AND ngayThanhToan IS NOT NULL
               AND DATE(ngayThanhToan) BETWEEN :tu AND :den

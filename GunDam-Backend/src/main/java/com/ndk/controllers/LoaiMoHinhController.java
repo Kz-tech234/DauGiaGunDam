@@ -24,9 +24,10 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class LoaiMoHinhController {
+
     @Autowired
     private LoaiMoHinhService loaiSanPhamService;
-    
+
     @Autowired
     private NguoiDungService nguoiDungService;
 
@@ -41,21 +42,21 @@ public class LoaiMoHinhController {
     // Xử lý form
     @PostMapping("/admin/loaiSanPham")
     public String themLoaiSanPham(@ModelAttribute @Valid LoaiMoHinh loaiSanPham,
-                                   BindingResult result,
-                                   Model model,
-                                   Principal principal) {
+            BindingResult result,
+            Model model,
+            Principal principal) {
         if (!result.hasErrors()) {
             String username = principal.getName();
             loaiSanPham.setNguoiDung(nguoiDungService.getByUsername(username));
             loaiSanPham.setTrangThai("HOAT_DONG");
-            
+
             loaiSanPhamService.addLoaiSanPham(loaiSanPham);
             model.addAttribute("successMessage", "Thêm loại sản phẩm thành công!");
         }
         model.addAttribute("dsLoai", loaiSanPhamService.getLoaiSanPham());
-        return "loaiSanPham";
+        return "redirect:/admin/loaiSanPham";
     }
-    
+
     @PostMapping("/admin/xoa-loai")
     public String xoaLoai(@RequestParam("id") int id, Model model) {
         try {
