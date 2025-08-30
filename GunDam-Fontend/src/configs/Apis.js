@@ -2,7 +2,7 @@ import axios from "axios";
 import cookie from "react-cookies";
 
 // ✅ Cập nhật base URL đúng với backend của project dau gia
-const BASE_URL = 'http://localhost:8080/SpringDauGiaMoHinh/api/';
+const BASE_URL = 'http://localhost:8080/GunDam-Backend/api/';
 
 export const endpoints = {
     // Authentication

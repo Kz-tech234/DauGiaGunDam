@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/phiendaugia")
 @CrossOrigin(origins = "http://localhost:3000")
 public class ApiCuocDauGiaController {
+
     @Autowired
     private CuocDauGiaService phienDauGiaService;
 
@@ -62,17 +63,21 @@ public class ApiCuocDauGiaController {
         if (phien != null) {
             // Cập nhật giá hiện tại
             NguoiDungCuocDauGia max = phienDauGiaNguoiDungService.getGiaCaoNhat(id);
+            DonThangDauGia donThanhToan = donThanhToanDauGiaService.findByPhien(phien);
+
             if (max != null) {
                 phien.setGiaHienTai(max.getGiaDau());
             } else {
-                //phien.setGiaHienTai(phien.getSanPham().getGiaKhoiDiem());
-                phien.setGiaHienTai(null);
+                phien.setGiaHienTai(null); // Không có giá đấu hiện tại
             }
 
-            // Nếu có WINNER + giá chốt thì tạo đơn
-//            if (phien.getGiaChot() != null && phien.getNguoiThangDauGia() != null) {
-//                donThanhToanDauGiaService.taoDon(phien);
-//            }
+            // Đảm bảo rằng luôn có thông tin thanh toán nếu đã có đơn
+            if (donThanhToan != null) {
+                phien.setDonThanhToan(donThanhToan);
+            } else {
+                phien.setDonThanhToan(null); // Không có đơn thanh toán
+            }
+
             return ResponseEntity.ok(phien);
         }
 

@@ -86,11 +86,13 @@ public class DonThangDauGiaRepositoryImpl implements DonThangDauGiaRepository{
     }
 
     @Override
-    public List<DonThangDauGia> DonQuaHanChuaThanhToan(DonThangDauGia.TrangThai trangThai, Date deadline) {
-        String hql = "FROM DonThangnDauGia d WHERE d.trangThai = :trangThai AND d.ngayTao < :deadline";
+    public List<DonThangDauGia> DonQuaHanChuaThanhToan() {
+        Date today = new Date();
+        Date threeDaysAgo = new Date(today.getTime() - 3L * 24 * 60 * 60 * 1000); // 3 ngày trướcai AND d.ngay
+        String hql = "FROM DonThangDauGia d WHERE d.trangThai = :trangThai AND d.ngayTao < :threeDaysAgo";
         return s().createQuery(hql, DonThangDauGia.class)
-                .setParameter("trangThai", trangThai)
-                .setParameter("deadline", deadline)
+                .setParameter("trangThai", DonThangDauGia.TrangThai.PENDING)
+                .setParameter("threeDaysAgo", threeDaysAgo)
                 .getResultList();
     }
 

@@ -23,7 +23,7 @@ import java.util.Date;
  * @author Nguyen Dang Khoi
  */
 @Entity 
-@Table(name="cuocdaugias")
+@Table(name="cuocdaugia")
 public class CuocDauGia implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

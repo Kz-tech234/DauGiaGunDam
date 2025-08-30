@@ -21,7 +21,7 @@ import java.util.Date;
  * @author Nguyen Dang Khoi
  */
 @Entity
-@Table(name = "theodoimohinh")
+@Table(name = "theodoimohinhs")
 public class TheoDoiMoHinh implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

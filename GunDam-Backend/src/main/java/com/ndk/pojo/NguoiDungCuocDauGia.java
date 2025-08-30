@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
  * @author Nguyen Dang Khoi
  */
 @Entity
-@Table(name = "nguoidung_cuocdaugias")
+@Table(name = "nguoidungcuocdaugia")
 public class NguoiDungCuocDauGia implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -21,6 +21,7 @@ const ChiTietBaiDauGia = () => {
       try {
         const res = await authApis().get(`${endpoints["cuoc-dau-gia"]}/${id}`);
         setPhien(res.data);
+        console.log(res.data);
       } catch (err) {
         console.error("Lỗi khi tải chi tiết phiên:", err);
       }
@@ -73,10 +74,27 @@ const ChiTietBaiDauGia = () => {
   const winnerName = phien?.nguoiThangDauGia?.hoTen;
   const finalPrice = phien?.giaChot;
 
+  const { winnerPayment } = useMemo(() => {
+    if (!phien) return { winnerPayment: null };
+
+    // Nếu phiên đấu giá đã kết thúc, lấy thông tin thanh toán của người thắng cuộc
+    if (phien.giaChot && phien.nguoiThangDauGia) {
+      const payment = phien.donThanhToan; // Giả sử 'donThanhToan' chứa thông tin thanh toán
+      return { winnerPayment: payment || null };
+    }
+    return { winnerPayment: null };
+  }, [phien]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // chặn luôn ở client
+    // Kiểm tra xem người dùng đã đăng nhập chưa
+    if (!user) {
+      setMessage({ type: "warning", text: "Bạn cần đăng nhập/đăng ký để tham gia đấu giá." });
+      return;
+    }
+
+    // Kiểm tra nếu là chủ sở hữu sản phẩm
     if (isOwner) {
       setMessage({ type: "warning", text: "Bạn không thể đấu giá sản phẩm của chính mình." });
       return;
@@ -187,6 +205,17 @@ const ChiTietBaiDauGia = () => {
                         Người thắng cuộc: <strong>{winnerName}</strong> với giá{" "}
                         <strong>{finalPrice.toLocaleString()} đ</strong>
                       </Alert>
+                    )}
+
+                    {winnerPayment && (
+                      <Card body className="mt-3">
+                        <h6 className="mb-3">Thông tin thanh toán người thắng cuộc</h6>
+                        <p><strong>Họ tên nhận:</strong> {winnerPayment.hoTenNhan}</p>
+                        <p><strong>Số điện thoại:</strong> {winnerPayment.soDienThoai}</p>
+                        <p><strong>Địa chỉ nhận:</strong> {winnerPayment.diaChiNhan}</p>
+                        <p><strong>Phương thức thanh toán:</strong> {winnerPayment.phuongThuc}</p>
+                        <p><strong>Ghi chú:</strong> {winnerPayment.ghiChu}</p>
+                      </Card>
                     )}
                   </>
                 )}

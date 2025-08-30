@@ -79,7 +79,7 @@ public class CuocDauGiaRepositoryImpl implements CuocDauGiaRepository{
         Date now = new Date();
         if (phien.getThoiGianKetThuc().before(now) && phien.getGiaChot() == null) {
             // Lấy người có giá cao nhất
-            String hql = "FROM PhienDauGiaNguoiDung WHERE phienDauGia.id = :phienId ORDER BY giaDau DESC";
+            String hql = "FROM NguoiDungCuocDauGia WHERE phienDauGia.id = :phienId ORDER BY giaDau DESC";
             Query<NguoiDungCuocDauGia> q = session.createQuery(hql, NguoiDungCuocDauGia.class);
             q.setParameter("phienId", phienId);
             q.setMaxResults(1);
@@ -102,7 +102,7 @@ public class CuocDauGiaRepositoryImpl implements CuocDauGiaRepository{
     
     public List<CuocDauGia> getPhienDauByNguoiDangId(int nguoiDangId) {
         Session session = this.factory.getObject().getCurrentSession();
-        String hql = "FROM PhienDauGia p WHERE p.nguoiDang.id = :nguoiDangId";
+        String hql = "FROM CuocDauGia p WHERE p.nguoiDang.id = :nguoiDangId";
         Query<CuocDauGia> query = session.createQuery(hql, CuocDauGia.class);
         query.setParameter("nguoiDangId", nguoiDangId);
         return query.getResultList();

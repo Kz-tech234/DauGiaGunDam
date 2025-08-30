@@ -20,6 +20,6 @@ public interface DonThangDauGiaRepository {
     DonThangDauGia update(DonThangDauGia d);
     DonThangDauGia getById(Integer id);
     DonThangDauGia taoDon(CuocDauGia p);
-    List<DonThangDauGia> DonQuaHanChuaThanhToan(DonThangDauGia.TrangThai trangThai, java.util.Date deadline);
+    List<DonThangDauGia> DonQuaHanChuaThanhToan();
     void huyDon(int donId, String lyDo);
 }

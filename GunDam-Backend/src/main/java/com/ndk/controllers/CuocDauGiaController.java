@@ -59,6 +59,6 @@ public class CuocDauGiaController {
                 sanPhamService.updateTrangThai(id, "KHONG_DUYET");
             }
         }
-        return "redirect:/admin/duyetMoHinh";
+        return "redirect:/admin/duyetSanPham";
     }
 }

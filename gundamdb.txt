@@ -121,5 +121,5 @@ VALUES (
     '0287653532',
     'TP.HCM',
     'ROLE_ADMIN',
-    'duocDuyet'
+    'DUOC_DUYET'
 );

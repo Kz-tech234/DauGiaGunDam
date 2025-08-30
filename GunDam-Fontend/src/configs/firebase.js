@@ -1,14 +1,14 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 const firebaseConfig = {
-  apiKey: "AIzaSyCYQ7cMSrBMQivpfh92HzXYDkr6gbQV5IY",
-  authDomain: "daugiafigure.firebaseapp.com",
-  databaseURL: "https://daugiafigure-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "daugiafigure",
-  storageBucket: "daugiafigure.appspot.com",
-  messagingSenderId: "409335460945",
-  appId: "1:409335460945:web:71048cc271b247f7957470",
-  measurementId: "G-WJ4J0QXHVF"
+  apiKey: "AIzaSyAs2FTAwmYZVDWd_MbS9lfqzdwwcKu-BLI",
+  authDomain: "daugiagundam.firebaseapp.com",
+  databaseURL: "https://daugiagundam-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "daugiagundam",
+  storageBucket: "daugiagundam.appspot.com",
+  messagingSenderId: "297843472832",
+  appId: "1:297843472832:web:1ead14f1fe6df736613025",
+  measurementId: "G-PML2MGPC2M"
 };
 
 const app = initializeApp(firebaseConfig);
